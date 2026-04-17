@@ -142,7 +142,7 @@ curl: (28) Connection timed out after 5002 milliseconds
 ```mermaid
 flowchart TB
     subgraph Host_OS ["Host OS (Windows)"]
-        H_IP["192.168.174.1"]
+        H_IP["IP: 192.168.174.1"]
     end
 
     subgraph BASTION ["bastion (跳板機)"]
@@ -151,17 +151,17 @@ flowchart TB
     end
 
     subgraph APP ["app (應用層)"]
-        A_HO["Host-only (192.168.174.129)"]
+        A_HO["NIC1: Host-only (192.168.174.129)"]
     end
 
     subgraph DB ["db (資料層)"]
-        D_HO["Host-only (192.168.174.131)"]
+        D_HO["NIC1: Host-only (192.168.174.131)"]
     end
 
     H_IP -- "SSH ProxyJump (-J)" --> B_HO
-    B_HO -- "SSH (Internal)" --> A_HO
-    B_HO -- "SSH (Internal)" --> D_HO
-    A_HO -- "Traffic" -.-> D_HO
+    B_HO -- "Internal SSH" --> A_HO
+    B_HO -- "Internal SSH" --> D_HO
+    A_HO -.-> D_HO
 
     style BASTION fill:#fef3c7,stroke:#333
     style APP fill:#dbeafe,stroke:#333
