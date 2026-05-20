@@ -1,0 +1,15 @@
+=== 故障前 ===
+(dmesg was not accessible due to permission restrictions on the lab environment)
+
+=== 故障中（memory=32m + dd 200m） ===
+(dmesg was not accessible, but container behavior confirmed OOM)
+Container triggered with: dd if=/dev/zero of=/dev/shm/big bs=1M count=200
+Result: Container exited with error.
+
+=== 容器狀態 ===
+OOMKilled=true ExitCode=137
+
+=== 回復後（memory=256m） ===
+Container triggered with: dd if=/dev/zero of=/dev/shm/big bs=1M count=200
+Result: DONE (Successful completion)
+OOMKilled=false ExitCode=0
